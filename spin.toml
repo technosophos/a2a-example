@@ -1,0 +1,24 @@
+spin_manifest_version = 2
+
+[application]
+authors = ["Matt Butcher <matt.butcher@fermyon.com>"]
+description = "An example A2A agent"
+name = "zed-test"
+version = "0.1.0"
+
+[variables]
+gemini_api_key = { required = true }
+
+[[trigger.http]]
+route = "/..."
+component = "zed-test"
+
+[component.zed-test]
+source = "dist/zed-test.wasm"
+exclude_files = ["**/node_modules"]
+allowed_outbound_hosts = ["https://generativelanguage.googleapis.com"]
+[component.zed-test.variables]
+gemini_api_key = "{{ gemini_api_key }}"
+[component.zed-test.build]
+command = ["npm install", "npm run build"]
+watch = ["src/**/*.ts"]
