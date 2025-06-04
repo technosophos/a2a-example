@@ -1,9 +1,11 @@
 // For AutoRouter documentation refer to https://itty.dev/itty-router/routers/autorouter
 import { AutoRouter, createResponse } from "itty-router";
 import { GoogleGenAI } from "@google/genai";
+import { Variables } from "@fermyon/spin-sdk";
 
+console.log(Variables.get("gemini_api_key"));
 let gemini = new GoogleGenAI({
-  apiKey: "AIzaSyDLls3dMKSIF_N9p49X8WnPjP6JZUH4r7s",
+  apiKey: Variables.get("gemini_api_key") || "",
 });
 let router = AutoRouter();
 
