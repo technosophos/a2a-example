@@ -3,10 +3,6 @@ import { AutoRouter, createResponse } from "itty-router";
 import { GoogleGenAI } from "@google/genai";
 import { Variables } from "@fermyon/spin-sdk";
 
-console.log(Variables.get("gemini_api_key"));
-let gemini = new GoogleGenAI({
-  apiKey: Variables.get("gemini_api_key") || "",
-});
 let router = AutoRouter();
 
 const AGENT_CARD = {
@@ -120,6 +116,10 @@ async function taskUtilitarian(id: string, params: any): Promise<Response> {
 }
 
 async function doGeminiInference(question: string): Promise<string> {
+  console.log(Variables.get("gemini_api_key"));
+  let gemini = new GoogleGenAI({
+    apiKey: Variables.get("gemini_api_key") || "",
+  });
   let inference = await gemini.models.generateContent({
     model: "gemini-2.0-flash",
     contents: `You are a utilitarian moral philosopher. Announce which moral framework you are using, and then answer the question.
