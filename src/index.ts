@@ -116,7 +116,6 @@ async function taskUtilitarian(id: string, params: any): Promise<Response> {
 }
 
 async function doGeminiInference(question: string): Promise<string> {
-  console.log(Variables.get("gemini_api_key"));
   let gemini = new GoogleGenAI({
     apiKey: Variables.get("gemini_api_key") || "",
   });
